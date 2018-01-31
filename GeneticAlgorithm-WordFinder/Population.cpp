@@ -8,8 +8,9 @@ void Population::calculatePopulationFitness() {
 	for (size_t i = 0; i < population.size(); i++) {
 		population.at(i).calculateFitness(targetWord);
 	}
-	std::cout << "Gen: " << getGenerations() << std::endl;
+	std::cout << "Generation: " << getGenerations() << std::endl;
 	std::cout << "Best Fitness Phrase: " << getBestFit() << std::endl;
+	std::cout << "Average Generation Fitness: " << getAverageFitness() << std::endl;
 	std::cout << std::endl;
 }
 
@@ -25,12 +26,11 @@ void Population::naturalSelection() {
 
 	for (size_t i = 0; i < population.size(); i++) {
 		float fitness = population.at(i).getFitness() / maxfitness;
-		int n = int(fitness * 10);
+		int n = int(fitness * 20);
 
 		for (int k = 0; k <= n; k++) {
 			mating.push_back(population.at(i));
 		}
-
 	}
 }
 
@@ -45,30 +45,8 @@ void Population::generate() {
 		size_t a = (int) uni(rng);
 		size_t b = (int) uni(rng);
 
-		DNA partnerA;
-		DNA partnerB;
-
-		if (mating.size() != 0) {
-			///std::cout << "Mating Size:" << mating.size() << std::endl;
-			try {
-				partnerA = mating.at(a);
-			}
-			catch (...) {
-				std::cout << "Catch Block" << std::endl;
-				std::cout << "Partner A: " << partnerA.getGeneSize() << std::endl;
-			}
-
-			try {
-				partnerB = mating.at(b);
-			}
-			catch (...) {
-				std::cout << "Catch Block" << std::endl;
-				std::cout << "Partner B: " << partnerB.getGeneSize() << std::endl;
-			}
-		}
-		else {
-			std::cout << "Mating Size 0" << std::endl;
-		}
+		DNA partnerA = mating.at(a);
+		DNA partnerB = mating.at(b);
 
 		DNA child = partnerA.crossover(partnerB);
 		child.mutate(mutationRate);
@@ -81,7 +59,7 @@ void Population::setFinished(bool state){
 	this->finished = state;
 }
 
-string Population::getBestFit(){
+string  Population::getBestFit(){
 	float bestFitness = 0.0f;
 	int index = 0;
 
@@ -107,7 +85,14 @@ int Population::getGenerations(){
 	return generations;
 }
 
+float Population::getAverageFitness() {
+	float total = 0.0f;
+	for (size_t i = 0; i < population.size(); i++) {
+		total += population.at(i).getFitness();
+	}
 
+	return total / population.size();
+}
 
 Population::Population(string word, float mutationRate, int  maxPopulation){
 	this->targetWord = word;
@@ -126,7 +111,7 @@ Population::Population(string word, float mutationRate, int  maxPopulation){
 }
 
 Population::Population() {
-	///
+
 }
 
 Population::~Population(){

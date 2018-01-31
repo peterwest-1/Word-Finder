@@ -18,7 +18,7 @@ float DNA::getFitness(){
 }
 
 string DNA::getGenes(){
-	string word = "";
+	string word;
 	for (size_t j = 0; j < genes.size(); j++) {
 		word += genes.at(j);
 	}
@@ -81,7 +81,6 @@ DNA::DNA(int numberOfCharacters) {
 	std::mt19937 rng(rdom());
 	std::uniform_int_distribution<int> uni(0, 25);
 
-	//srand((unsigned int) time(NULL));
 	genes = vector<char>(numberOfCharacters);
 	for (size_t i = 0; i < genes.size(); i++) {
 		genes.at(i) = alpha[uni(rng)];
@@ -89,7 +88,7 @@ DNA::DNA(int numberOfCharacters) {
 }
 
 DNA::DNA() {
-	//default constructor
+
 }
 
 DNA::~DNA(){

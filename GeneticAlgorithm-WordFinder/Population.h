@@ -22,7 +22,7 @@ public:
 	void naturalSelection();
 	void generate();
 	string getBestFit();
-
+	float getAverageFitness();
 	bool getFinished();
 	int getGenerations();
 
