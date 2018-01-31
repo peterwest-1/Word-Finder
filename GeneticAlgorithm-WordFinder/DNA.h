@@ -6,8 +6,7 @@
 #include <random>
 using namespace std;
 
-class DNA
-{
+class DNA{
 	vector<char> genes;
 	float fitness = 0;
 
