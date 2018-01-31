@@ -7,8 +7,7 @@
 #include "DNA.h"
 using namespace std;
 
-class Population
-{
+class Population{
 	float mutationRate = 0.01f;
 	vector<DNA> population;
 	vector<DNA> mating;

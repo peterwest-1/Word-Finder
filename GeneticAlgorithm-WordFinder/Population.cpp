@@ -8,8 +8,9 @@ void Population::calculatePopulationFitness() {
 	for (size_t i = 0; i < population.size(); i++) {
 		population.at(i).calculateFitness(targetWord);
 	}
-
-	std::cout << "Gen: " << getGenerations() << " Best Fitness Phrase: " << getBestFit() << std::endl;
+	std::cout << "Gen: " << getGenerations() << std::endl;
+	std::cout << "Best Fitness Phrase: " << getBestFit() << std::endl;
+	std::cout << std::endl;
 }
 
 void Population::naturalSelection() {
@@ -31,9 +32,6 @@ void Population::naturalSelection() {
 		}
 
 	}
-	
-	///std::cout << "Generation: " << getGenerations() << std::endl;
-	///std::cout << "Max Fitness: " << maxfitness <<  std::endl;
 }
 
 void Population::generate() {
@@ -79,13 +77,11 @@ void Population::generate() {
 	generations++;
 }
 
-void Population::setFinished(bool state)
-{
+void Population::setFinished(bool state){
 	this->finished = state;
 }
 
-string Population::getBestFit()
-{
+string Population::getBestFit(){
 	float bestFitness = 0.0f;
 	int index = 0;
 
@@ -103,20 +99,17 @@ string Population::getBestFit()
 	return population.at(index).getGenes();
 }
 
-bool Population::getFinished()
-{
+bool Population::getFinished(){
 	return finished;
 }
 
-int Population::getGenerations()
-{
+int Population::getGenerations(){
 	return generations;
 }
 
 
 
-Population::Population(string word, float mutationRate, int  maxPopulation)
-{
+Population::Population(string word, float mutationRate, int  maxPopulation){
 	this->targetWord = word;
 	this->mutationRate = mutationRate;
 	this->population = vector<DNA>(maxPopulation);

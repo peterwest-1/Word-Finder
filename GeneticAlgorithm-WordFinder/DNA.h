@@ -8,11 +8,11 @@ using namespace std;
 
 class DNA
 {
-
 	vector<char> genes;
 	float fitness = 0;
 
 public:
+
 	size_t getGeneSize();
 	float getFitness();
 	string getGenes();
