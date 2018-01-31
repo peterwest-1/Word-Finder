@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DNA.h"
 #include <time.h>
+#include <math.h>
 #include <random>
 
 
@@ -35,7 +36,7 @@ void DNA::calculateFitness(string target){
 		}
 	}
 
-	fitness = (float) score / targetChar.size();
+	fitness = pow(2, score);
 }
 
 DNA DNA::crossover(DNA partner){

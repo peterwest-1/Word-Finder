@@ -4,6 +4,7 @@
 #include <vector>
 #include <time.h>
 #include <random>
+#include <fstream>
 #include "DNA.h"
 using namespace std;
 
@@ -27,6 +28,8 @@ public:
 	int getGenerations();
 
 	void setFinished(bool state);
+
+	void writeToFile();
 
 	Population(string word, float mutationRate, int  maxPopulation);
 	Population();

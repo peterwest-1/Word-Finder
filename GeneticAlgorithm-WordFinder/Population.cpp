@@ -1,17 +1,19 @@
 
-#include <random>
 #include "stdafx.h"
 #include "Population.h"
+
 
 
 void Population::calculatePopulationFitness() {
 	for (size_t i = 0; i < population.size(); i++) {
 		population.at(i).calculateFitness(targetWord);
 	}
+
 	std::cout << "Generation: " << getGenerations() << std::endl;
 	std::cout << "Best Fitness Phrase: " << getBestFit() << std::endl;
 	std::cout << "Average Generation Fitness: " << getAverageFitness() << std::endl;
 	std::cout << std::endl;
+	
 }
 
 void Population::naturalSelection() {
@@ -59,6 +61,13 @@ void Population::setFinished(bool state){
 	this->finished = state;
 }
 
+void Population::writeToFile(){
+	ofstream outputFile;
+	outputFile.open("word-finder-output.csv", ios::app);
+	outputFile << getGenerations() << "," << getAverageFitness() << std::endl;
+	outputFile.close();
+}
+
 string  Population::getBestFit(){
 	float bestFitness = 0.0f;
 	int index = 0;
@@ -70,7 +79,7 @@ string  Population::getBestFit(){
 		}
 	}
 
-	if (bestFitness == 1) {
+	if (bestFitness == perfectScore) {
 		setFinished(true);
 	}
 
@@ -98,6 +107,7 @@ Population::Population(string word, float mutationRate, int  maxPopulation){
 	this->targetWord = word;
 	this->mutationRate = mutationRate;
 	this->population = vector<DNA>(maxPopulation);
+	this->perfectScore = (int)pow(2, targetWord.length());
 
 	for (size_t i = 0; i < population.size(); i++) {
 		population.at(i) = DNA(targetWord.length());
