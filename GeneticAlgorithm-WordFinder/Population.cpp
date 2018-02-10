@@ -108,6 +108,7 @@ Population::Population(string word, float mutationRate, int  maxPopulation){
 	this->mutationRate = mutationRate;
 	this->population = vector<DNA>(maxPopulation);
 	this->perfectScore = (int)pow(2, targetWord.length());
+	std::cout << perfectScore << std::endl;
 
 	for (size_t i = 0; i < population.size(); i++) {
 		population.at(i) = DNA(targetWord.length());
